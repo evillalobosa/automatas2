@@ -17,4 +17,6 @@ TO-DO
 + transition acordeon menu when open
 + blur background pop-up
 + description 'background:blur' on hover index.html
++ add Event Listener a la parte de añadir abecedario
++ Corregir tildes
 -->

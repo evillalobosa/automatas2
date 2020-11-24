@@ -1,12 +1,14 @@
 .wrapper {
-    height: 100vh;
-    background-image: url(../img/wall.png);
-    background-size: cover;
-    background-position: fixed;
-    background-repeat: no-repeat;
+    height: 60vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.title {
+    padding-top: 10vw;
+    text-align: center;
+    font-weight: bold;
 }
 
 .insert-afd , .insert-ap {
@@ -24,13 +26,13 @@
     color: var(--black-fg);
 }
 
-.number {
+.seleccion-number {
     margin: 0px 50px 0px 30px;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     font-size: 4em;
 }
-.title {
+.seleccion-title {
     font-family: "Roboto Condensed", sans-serif;
     font-weight: bold;
     font-size: 1.5em;

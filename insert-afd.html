@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatas</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="icons/arturo.svg">
+    <!-- Fonts: .. -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;0,800;1,300&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet"> 
+    <!-- Imports -->
+    <link rel="stylesheet" href="css/master.css">
+    <script defer src="js/main.js"></script>
+</head>
+<body>
+    <div class="header">
+        <img src="icons/arturo.svg" alt="logo" width="50" height="50">
+        <h1>Automatas</h1>
+    </div>
+    <div class="previous-page">
+        <a href="index.html">
+            <img src="icons/previous.svg" alt="logo" width="15" height="15">
+            <span>Volver</span>
+        </a>
+    </div>
+    <div class="title">
+        <h1>Insertar Automata Finito Determinista</h1>
+    </div>
+    <div class="formulario">
+        <div class="alfabeto">
+            <h2>Tamaño del alfabeto</h2>
+            <input type="number" id="size-alfabeto" name="automata" autocomplete="off" value="1" min="1" required>
+        </div>
+        <div class="estado">
+            <h2>Cantidad de estados</h2>
+            <input type="number" id="estadosA" name="automata" autocomplete="off" value="1" min="1" required>
+        </div>
+        <div class="transicion">
+            <h2>Insertar transiciones</h2>
+            <button type="button" data-popup-target="#popupA" onclick="">Añadir transiciones de estado</button>
+        </div>
+    </div>
+    <div class="next-page">
+        <a href="">
+            <button>Continuar</button>
+        </a>
+    </div>
+</body>
+</html>
