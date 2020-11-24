@@ -8,10 +8,11 @@
     <link rel="icon" type="image/png" href="icons/arturo.svg">
     <!-- Fonts: .. -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;0,800;1,300&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;0,800;1,300&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Imports -->
     <link rel="stylesheet" href="css/master.css">
     <script defer src="js/main.js"></script>
+    <script defer src="js/popup.js"></script>
 </head>
 <body>
     <div class="header">
@@ -24,25 +25,53 @@
             <span>Volver</span>
         </a>
     </div>
-    <div class="title">
+    <div class="title" id="titulo">
         <h1>Insertar Automata Finito Determinista</h1>
     </div>
-    <div class="formulario">
-        <div class="alfabeto">
-            <h2>Tamaño del alfabeto</h2>
-            <input type="number" id="size-alfabeto" name="automata" autocomplete="off" value="1" min="1" required>
+    <div class="afd-wrap">
+        <div class="formulario">
+            <div class="alfabeto">
+                <h2>Tamaño del alfabeto</h2>
+                <input type="number" id="size-alfabeto" name="automata" autocomplete="off" value="1" min="1" required>
+            </div>
+            <div class="estado">
+                <h2>Cantidad de estados</h2>
+                <input type="number" id="estadosA" name="automata" autocomplete="off" value="1" min="1" required>
+            </div>
+            <div class="transicion">
+                <h2>Insertar transiciones</h2>
+                <button type="button" data-popup-target="#popupA" onclick="">Añadir transiciones de estado</button>
+            </div>
         </div>
-        <div class="estado">
-            <h2>Cantidad de estados</h2>
-            <input type="number" id="estadosA" name="automata" autocomplete="off" value="1" min="1" required>
+        <!-- Muestra el popup para ingresar transiciones -->
+        <div class="popup" id="popupA">
+            <div class="popup-header">
+                <h1>Transiciones de estado</h1>
+                <button data-close-button class="close-button">&times;</button>
+            </div>
+            <div class="popup-body">
+                <div class="transicion-formulario">
+                    <div id="transicion-input"></div>
+                </div>
+                <!-- Submit -->
+                <div class="transicion-submit">
+                    <button type="button" data-close-button onclick="setTransiciones()">Finalizar</button>
+                </div>
+            </div>
         </div>
-        <div class="transicion">
-            <h2>Insertar transiciones</h2>
-            <button type="button" data-popup-target="#popupA" onclick="">Añadir transiciones de estado</button>
+        <div class="tablero">
+            <table>
+                <caption>Informaci&oacuten</caption>
+                <tr>
+                    <th scope="col">Alfabeto</th>
+                    <th scope="col">Estados</th>
+                </tr>
+                <tbody id="tabla-automata"></tbody>
+            </table>
         </div>
     </div>
     <div class="next-page">
-        <a href="">
+        <a href="resultado-afd.html">
             <button>Continuar</button>
         </a>
     </div>

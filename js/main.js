@@ -1,16 +1,13 @@
-var mivar= [];
-var cont=0;
+var updateAlfabeto = document.getElementById('size-alfabeto');
+var updateEstado = document.getElementById('estadosA');
 
-function add() {
-    mivar.push(cont);
-    cont++;
-    console.log('agregado: '+mivar);
-    localStorage.setItem("array",mivar)
-}
 
-function inAFD() {
-    // mivar;
-    mivar = localStorage.getItem("array");
-    console.log(mivar);
-    return mivar;
-}
+updateAlfabeto.addEventListener("keydown", function () {
+    creaAlfabeto();
+    alfabetoTable();
+});
+
+updateEstado.addEventListener("keydown", function () {
+    creaEstados();
+    estadoTable();
+});

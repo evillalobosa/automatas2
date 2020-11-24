@@ -3,6 +3,7 @@
 @import "header.css";
 @import "afd-ap.css";
 @import "afd.css";
+@import "popup.css";
 
 body {
     width: 100%;
