@@ -1,6 +1,6 @@
 .previous-page, .home-page {
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.65);
+    background-color: var(--cloud);
     top: 7vw;
     padding: 10px;
     border-radius: 8px;
@@ -12,11 +12,20 @@
     left: 90%;
 }
 
-.resultado-afd {
-    background-color: rgba(255, 255, 255, 0.65);
+.resultado {
+    background-color: var(--cloud);
     padding: 30px;
     border-radius: 10px;
     width: 65%;
-    transform: translate(25%,25%);
-    margin: 0 30px 30px;
+    transform: translate(20%,25%);
+    margin: 0 30px 40px;
+}
+.resultado h2 {
+    margin-bottom: 20px;
+    padding: 10px 15px 5px;
+    border-bottom: 2px solid rgba(55,55,55,0.1);
+}
+
+.resultado-wrap {
+    height: 55vw;
 }
