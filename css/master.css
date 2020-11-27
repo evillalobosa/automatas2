@@ -1,13 +1,10 @@
 /* Load config*/
 @import "colors.css";
 @import "header.css";
-@import "afd-ap.css";
-@import "afd.css";
-@import "popup.css";
 
 body {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-image: url(../img/wall.png);
     background-size: cover;
     background-position: fixed;
@@ -19,4 +16,10 @@ body {
     margin: 0px;
     list-style: none;
     text-decoration: none;
+}
+
+.title {
+    padding-top: 7vw;
+    text-align: center;
+    font-weight: bold;
 }

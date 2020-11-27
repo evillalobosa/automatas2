@@ -28,7 +28,7 @@
         </a>
     </div>
     <div class="title" id="titulo">
-        <h1>Insertar Automata Finito Determinista</h1>
+        <h1>Insertar Automata de Pila</h1>
     </div>
     <div class="afd-wrap">
         <div class="formulario">
@@ -36,14 +36,29 @@
                 <h2>Tamaño del alfabeto</h2>
                 <input type="number" id="size-alfabeto" name="automata" autocomplete="off" value="1" min="1" required>
             </div>
-            <div class="estado">
+            <div class="form-ap">
                 <h2>Cantidad de estados</h2>
-                <input type="number" id="estadosA" name="automata" autocomplete="off" value="1" min="1" required>
+                <div class="sub-form-ap">
+                    <p>Automata 1:</p>
+                    <input type="number" id="estadosA1" name="automata" autocomplete="off" value="1" min="1" required>
+                </div>
+                <div class="sub-form-ap">
+                    <p>Automata 2:</p>
+                    <input type="number" id="estadosA2" name="automata" autocomplete="off" value="1" min="1" required>
+                </div>
             </div>
-            <div class="etiquetas">
+            <div class="form-ap">
                 <h2>Cantidad de etiquetas</h2>
-                <!-- Poner bool -->
-                <input type="number" id="estadosA" name="automata" autocomplete="off" value="1" min="1" required>
+                <div class="sub-form-ap">
+                    <p>Automata 1:</p>
+                    <input type="number" id="etiquetaA1" name="automata" autocomplete="off" value="1" min="1" required>
+                    <!-- Poner bool -->
+                </div>
+                <div class="sub-form-ap">
+                    <p>Automata 2:</p>
+                    <input type="number" id="etiquetaA2" name="automata" autocomplete="off" value="1" min="1" required>
+                    <!-- Poner bool -->
+                </div>
             </div>
             <div class="transicion">
                 <h2>Insertar transiciones</h2>
@@ -78,7 +93,7 @@
         </div>
     </div>
     <div class="next-page">
-        <a href="resultado-afd.html">
+        <a href="resultado-ap.html">
             <button>Continuar</button>
         </a>
     </div>

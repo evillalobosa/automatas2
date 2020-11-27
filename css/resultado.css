@@ -1,0 +1,22 @@
+.previous-page, .home-page {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.65);
+    top: 7vw;
+    padding: 10px;
+    border-radius: 8px;
+}
+.previous-page {
+    left: 2vw;
+}
+.home-page {
+    left: 90%;
+}
+
+.resultado-afd {
+    background-color: rgba(255, 255, 255, 0.65);
+    padding: 30px;
+    border-radius: 10px;
+    width: 65%;
+    transform: translate(25%,25%);
+    margin: 0 30px 30px;
+}
