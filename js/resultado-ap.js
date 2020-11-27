@@ -1,3 +1,10 @@
+var alfabeto = localStorage.getItem(alfabeto);
+var estado1 = localStorage.getItem(estado1);
+var estado2 = localStorage.getItem(estado2);
+var T1 = localStorage.getItem(T1);
+var T2 = localStorage.getItem(T2);
+
+// Calculo de operaciones
 function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
     var Estados_neo = [['A', 'i']], Alfabeto_neo = [], Transicion_neo = [];
     var aux = [];
@@ -63,12 +70,12 @@ function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
             }
         }
     }
-    
+
     // Verificamos
     if (Transicion_neo != 0) {
         console.log("Transiciones del Automata de Pila 1, guaradas con éxito.");
         console.log(Transicion_neo);
-        
+
         aux = Transiciones_2.slice();
         for (let i = Transicion_neo.length; aux != 0; i++) {
             Transicion_neo[i] = aux.shift();
@@ -96,14 +103,11 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
     neoEstados = Estado_1.slice();
     neoTransiciones = Transicion_1.slice();
 
-    /** ---- */
     // Guardamos el Alfabeto
     for (let i = 1; i < Alfabeto.length; i++) {
         neoAlfabeto.push(Alfabeto[i]);
     }
-    
 
-    /** ---- */
     //Procedemos a generar las nuevas Transiciones
     let aux_estados = Estado_2.slice();
     for (let i = 0; i < aux_estados.length; i++) {
@@ -127,7 +131,6 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
     }
     console.log("Así es como queda la nueva Transición : [" + neoTransiciones + "]");
 
-    /** ---- */
     // Guardamos el resto de los Estados.
     console.log(aux_estados[0][1])
     for (let i = neoEstados.length; aux_estados != 0; i++) {
@@ -145,7 +148,7 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
         for (let i = 0; i < neoEstados.length - aux_estados.length; i++) {
             if (neoEstados[i][1] == 'f') {
                 neoEstados[i][1] = 'n';
-                
+
             }
             else {
                 if (neoEstados[i][1] == 'if') {
@@ -161,17 +164,12 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
             }
         }
     }
-
-    /** ---- */
     // Retornamos el nuevo Automata.
     console.log("Después de todos los cambios, así queda nuestro Automata : ");
     console.log("[" + neoEstados + "], [" + neoAlfabeto + "], [" + neoTransiciones + "]");
     return [neoEstados, neoAlfabeto, neoTransiciones];
 }
 
-var Estado1 = [['q0','i'],['q1','n'],['q2','f']], Estado2 = [['r0','i'],['r1','n'],['r2','f']];
-var Trans1 = [['q0','q1','a','Nada','Nada'],['q0','q2','b','Nada','Nada'],['q1','q1','a','Nada','Nada'],['q1','q2','b','Nada','Nada'],['q2','q1','a','Nada','Nada'],['q2','q0','b','Nada','Nada']];
-var Trans2 = [['r0','r1','a','Nada','Nada'],['r0','r2','b','Nada','Nada'],['r1','r1','a','Nada','Nada'],['r1','r2','b','Nada','Nada'],['r2','r1','a','Nada','Nada'],['r2','r1','b','Nada','Nada']];
-var Alfa = ['E','a','b'];
 
-console.log(union(Estado1, Estado2, Alfa, Trans1, Trans2));
+union(estado1, estado2, alfabeto, T1, T2);
+Concatenacion(estado1, estado2, alfabeto, T1, T2);

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/master.css">
     <link rel="stylesheet" href="css/insert.css">
     <link rel="stylesheet" href="css/popup.css">
-    <script defer src="js/main.js"></script>
+    <script defer src="js/ap.js"></script>
     <script defer src="js/popup.js"></script>
 </head>
 <body>
@@ -51,12 +51,12 @@
                 <h2>Cantidad de etiquetas</h2>
                 <div class="sub-form-ap">
                     <p>Automata 1:</p>
-                    <input type="number" id="etiquetaA1" name="automata" autocomplete="off" value="1" min="1" required>
+                    <input type="number" id="etiquetasA1" name="automata" autocomplete="off" value="1" min="1" required>
                     <!-- Poner bool -->
                 </div>
                 <div class="sub-form-ap">
                     <p>Automata 2:</p>
-                    <input type="number" id="etiquetaA2" name="automata" autocomplete="off" value="1" min="1" required>
+                    <input type="number" id="etiquetasA2" name="automata" autocomplete="off" value="1" min="1" required>
                     <!-- Poner bool -->
                 </div>
             </div>
@@ -86,9 +86,10 @@
                 <caption>Informaci&oacuten</caption>
                 <tr>
                     <th scope="col">Alfabeto</th>
-                    <th scope="col">Estados</th>
+                    <th scope="col">Estados 1</th>
+                    <th scope="col">Estados 2</th>
                 </tr>
-                <tbody id="tabla-automata"></tbody>
+                <tbody id="tabla-automataAP"></tbody>
             </table>
         </div>
     </div>
