@@ -1,8 +1,8 @@
-var alfabeto = localStorage.getItem(alfabeto);
-var estado1 = localStorage.getItem(estado1);
-var estado2 = localStorage.getItem(estado2);
-var T1 = localStorage.getItem(T1);
-var T2 = localStorage.getItem(T2);
+var alfabeto = localStorage.getItem('alfabeto');
+var estado1 = localStorage.getItem('estado1');
+var estado2 = localStorage.getItem('estado2');
+var T1 = localStorage.getItem('transicion1');
+var T2 = localStorage.getItem('transicion2');
 
 // Calculo de operaciones
 function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
@@ -17,7 +17,7 @@ function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
         console.log(Alfabeto_neo);
     }
     else {
-        console.log("No se pudo guardar el Alfabeto.");
+        console.error("No se pudo guardar el Alfabeto.");
     }
 
     /** Estados */
@@ -51,7 +51,8 @@ function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
         }
     }
     else {
-        console.log("Ocurrió un error. No se puede proceder.");
+        console.error("Ocurrió un error. No se puede proceder.");
+        alert("Ocurrió un error. No se puede proceder.")
     }
 
     /** Transiciones */
@@ -88,10 +89,27 @@ function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
         }
     }
     else {
-        console.log("Ocurrió un error. No se puede proceder.");
+        console.error("Ocurrió un error. No se puede proceder.");
+        alert("Ocurrió un error. No se puede proceder");
     }
 
     /** Finalización */
+    // Imprime en pagina
+    var printUnion = document.getElementById('union');
+    printUnion.innerHTML= "";
+    // Estados
+    var estados = document.createElement("h3");
+    estados.textContent = 'Estados: '+ Estados_neo ;
+    printUnion.appendChild(estados);
+    // Alfabeto
+    var alfabeto = document.createElement("h3");
+    alfabeto.textContent = 'Alfabeto: '+Alfabeto_neo;
+    printUnion.appendChild(alfabeto);
+    // Transicion
+    var transiciones = document.createElement("h3");
+    transiciones.textContent = 'Transicion: '+Transicion_neo;
+    printUnion.appendChild(transiciones);
+
     // Procedemos a retornar todo el nuevo Automata de Pila.
     return [Estados_neo, Alfabeto_neo, Transicion_neo];
 }
@@ -164,6 +182,24 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
             }
         }
     }
+    
+    /** Finalización */
+    // Imprime en pagina
+    var printUnion = document.getElementById('union');
+    printUnion.innerHTML= "";
+    // Estados
+    var estados = document.createElement("h3");
+    estados.textContent = 'Estados: '+ neoEstados ;
+    printUnion.appendChild(estados);
+    // Alfabeto
+    var alfabeto = document.createElement("h3");
+    alfabeto.textContent = 'Alfabeto: '+neoAlfabeto;
+    printUnion.appendChild(alfabeto);
+    // Transicion
+    var transiciones = document.createElement("h3");
+    transiciones.textContent = 'Transicion: '+neoTransiciones;
+    printUnion.appendChild(transiciones);
+
     // Retornamos el nuevo Automata.
     console.log("Después de todos los cambios, así queda nuestro Automata : ");
     console.log("[" + neoEstados + "], [" + neoAlfabeto + "], [" + neoTransiciones + "]");

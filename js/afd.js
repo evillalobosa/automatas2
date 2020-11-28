@@ -4,60 +4,48 @@ var updateEtiquetasAFD = document.getElementById('etiquetasA');
 
 var alfabeto=[]
 var Bool=false;
-var AFDEST=[]
-var AFDTRA=[]
+var AFDEST=[];
+var AFDTRA=[];
 
 function InsertarAlfabeto(){
-    var NumeroIngresado = document.getElementById("size-alfabeto").value;
-    // NumeroIngresado=a;
     alfabeto=[];
+    var NumeroIngresado = document.getElementById("size-alfabeto").value;
+
     if((NumeroIngresado>0)&&(NumeroIngresado<702)){
-        if(Bool==true){
-            alfabeto.push("E");
-        }
         var aux;
         var Textaux;
         var textaux2;
         for(i=0;i<NumeroIngresado;i++){
-            if(i<=25){
-                aux=97+i;
-                aux=String.fromCharCode(aux);
-        }else{
-            textaux=96+(Math.trunc(i/26));
-            textaux=String.fromCharCode(textaux);
-            textaux2=97+(i-(26*(Math.trunc(i/26))));
-            textaux2=String.fromCharCode(textaux2);
-            aux=textaux.concat(textaux2);
+             if(i<=25){
+                  aux=97+i;
+                  aux=String.fromCharCode(aux);
+                }else{
+                    textaux=96+(Math.trunc(i/26));
+                    textaux=String.fromCharCode(textaux);
+                    textaux2=97+(i-(26*(Math.trunc(i/26))));
+                    textaux2=String.fromCharCode(textaux2);
+                    aux=textaux.concat(textaux2);
+                }
+                alfabeto.push(aux);
         }
-        alfabeto.push(aux);
-        localStorage.setItem(alfabeto, alfabeto)
-     }
+        console.log("alfabeto agregado correctamente");
+        console.log(alfabeto);
+        localStorage.setItem('alfabeto', alfabeto);
     }else{
-       console.error("debe ingresar un número mayor a 1 y menor a 702");
-       alert("debe ingresar un número mayor a 1 y menor a 702");
+       console.error("Debe ingresar un número mayor a 1 y menor a 702");
+       alert("Debe ingresar un número mayor a 1 y menor a 702");
     }
 }
 
-function InsertarEstadosAFD(a,b,c){
-    //var Numero1Ingresado = document.getElementById("insertarNumero1").value;
-    //var Numero2Ingresado = document.getElementById("insertarNumero2").value;
-    //var BoolIngresado = document.getElementById("insertarBool").value;
-
+function InsertarEstadosAFD(){
     AFDEST=[];
-    var Numero1Ingresado=a;
-    var Numero2Ingresado=b;
-    var BoolIngresado=c;
+    var Numero1Ingresado = document.getElementById("estadosA").value;
     var letra="q";
     var textaux;
     var validacion=false;
 
     if(Numero1Ingresado>0){
-        if((Numero1Ingresado-1)>Numero2Ingresado){
-            validacion=true;
-        }else{
-            console.error("numero de estados finales mayor de lo permitido");
-            alert("numero de estados finales mayor de lo permitido");
-        }
+        validacion=true;
     }else{
         console.error("numero debe ser mayor que 0");
         alert("numero debe ser mayor que 0");
@@ -68,40 +56,62 @@ function InsertarEstadosAFD(a,b,c){
             textaux=letra.concat(i);
             AFDEST.push([textaux,"n"]);
         }
+        console.log("Estados ingresados correctamente");
+        console.log(AFDEST);
+        localStorage.setItem('estado', AFDEST);
+    }
+
+}
+
+function InsertarEtiquetas(){
+    var NumeroIngresado = document.getElementById("etiquetasA").value;
+    var BoolIngresado = document.getElementById("etiquetaBool").value;
+    validacion=false;
+
+    if((AFDEST.length-1)>NumeroIngresado){
+        validacion=true;
+    }else{
+        console.error("numero de estados finales mayor de lo permitido");
+        alert("numero de estados finales mayor de lo permitido");
+    }
+
+    if(validacion==true){
+        for(i=0;i<AFDEST.length;i++){
+            AFDEST[i][1]="n";
+        }
         for(j=0;j<AFDEST.length;j++){
             if(j==0){
                 if(BoolIngresado==false){
                     AFDEST[j][1]="i";
                 }else{
                     AFDEST[j][1]="if";
-
                 }
             }else{
-                if(j>=((AFDEST.length)-Numero2Ingresado)){
+                if(j>=((AFDEST.length)-NumeroIngresado)){
                     AFDEST[j][1]="f"
                 }
             }
         }
-        console.log("estados ingresados correctamente");
+        console.log("las etiquetas se actualizado adecuadamente");
         console.log(AFDEST);
+        localStorage.setItem('estado', AFDEST);
     }
-
 }
 
 function InsertarTrancionesAFD(){
-    var validacion=0;
-    var Numero1Ingresado = document.getElementById("insertarNumero1").value;
+    var validacion=false;
+    var size = alfabeto.length*AFDEST.length;
     AFDTRA=[];
 
-    for(i=1;i<=Numero1Ingresado;i++){
+    for(i=1;i<=size;i++){
         var Estado1Ingresado = document.getElementById("inicio"+i).value;
         var Estado2Ingresado = document.getElementById("final"+i).value;
         var ABCIngresado = document.getElementById("alfabeto"+i).value;
         AFDTRA.push([Estado1Ingresado,ABCIngresado,Estado2Ingresado]);
     }
 
-    if(Numero1Ingresado>1){
-        if(Numero1Ingresado == (alfabeto.length*AFDEST.length)){
+    if(size>1){
+        if(size == (alfabeto.length*AFDEST.length)){
             var cont1=0;
             for(j=0;j<alfabeto.length;j++){
                 var cont2=0;
@@ -115,7 +125,7 @@ function InsertarTrancionesAFD(){
                 }
             }
             if(cont1==AFDEST.length){
-                validacion=1;
+                validacion=true;
             }else{
                 console.error("número de veces que se uso cada elemento del alfabeto no corresponde con el tipo de automata");
                 alert("número de veces que se uso cada elemento del alfabeto no corresponde con el tipo de automata");
@@ -129,8 +139,13 @@ function InsertarTrancionesAFD(){
         alert("número ingresado debe ser un numero mayor 0");
     }
 
-    if(validacion == 0){
+    if(validacion == false){
         AFDTRA=[];
+    }
+    else {
+        console.log("Las Transiciones se actualizado adecuadamente");
+        console.log(AFDTRA);
+        localStorage.setItem('transicion', AFDTRA);
     }
 }
 
@@ -158,6 +173,48 @@ function updateTableAFD() {
         }
 }
 
+
+// Crea los recuadros para ingresar transiciones
+var inputTransicion = function() {
+    var div = document.createElement("div");
+    document.getElementById('transicion-input').appendChild(div);
+    // Set div ID: Trans+#n
+    div.setAttribute("id", "Trans" + document.getElementById('transicion-input').childElementCount);
+    div.setAttribute("style", "padding:10px 0px; display:flex; justify-content:space-around;");
+
+    // Set inputs: inicio
+    var inicio = document.createElement("input")
+    inicio.setAttribute("id", "inicio" + document.getElementById('transicion-input').childElementCount);
+    inicio.setAttribute("type","text");
+    inicio.setAttribute("placeholder", "inicio");
+    inicio.setAttribute("style", "padding:10px; width:100px;");
+
+    // Set inputs: alfabeto
+    var alfabeto = document.createElement("input")
+    alfabeto.setAttribute("id", "alfabeto" + document.getElementById('transicion-input').childElementCount);
+    alfabeto.setAttribute("type","text");
+    alfabeto.setAttribute("placeholder", "alfabeto");
+    alfabeto.setAttribute("style", "padding:10px; width:100px;");
+
+    // Set inputs: termino
+    var termino = document.createElement("input")
+    termino.setAttribute("id", "termino" + document.getElementById('transicion-input').childElementCount);
+    termino.setAttribute("type","text");
+    termino.setAttribute("placeholder", "termino");
+    termino.setAttribute("style", "padding:10px; width:100px;");
+
+    // Append inputs
+    div.appendChild(inicio);
+    div.appendChild(alfabeto);
+    div.appendChild(termino);
+};
+
+function transicionesAFD() {
+    for(var i=0; i<AFDEST.length*alfabeto.length; i++){
+        inputTransicion();
+    }
+}
+
 updateAlfabeto.addEventListener("keydown", function () {
     InsertarAlfabeto();
     updateTableAFD();
@@ -167,5 +224,5 @@ updateEstadoAFD.addEventListener("keydown", function () {
     updateTableAFD();
 });
 updateEtiquetasAFD.addEventListener("keydown", function () {
-    // InsertarEtiquetasAFD();
+    InsertarEtiquetas();
 });

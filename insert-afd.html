@@ -32,22 +32,25 @@
     </div>
     <div class="afd-wrap">
         <div class="formulario">
-            <div class="alfabeto">
+            <div class="sub-form">
                 <h2>Tamaño del alfabeto</h2>
                 <input type="number" id="size-alfabeto" name="automata" autocomplete="off" value="1" min="1" required>
             </div>
-            <div class="estado">
+            <div class="sub-form">
                 <h2>Cantidad de estados</h2>
                 <input type="number" id="estadosA" name="automata" autocomplete="off" value="1" min="1" required>
             </div>
-            <div class="etiquetas">
+            <div class="sub-form">
                 <h2>Cantidad de etiquetas</h2>
-                <!-- Poner bool -->
                 <input type="number" id="etiquetasA" name="automata" autocomplete="off" value="1" min="1" required>
+                <div class="etiqueta-bool">
+                    <label for="">¿Inicial es final?</label>
+                    <input type="checkbox" id="etiquetaBool" name="etiqueta">
+                </div>
             </div>
-            <div class="transicion">
+            <div class="sub-form transicion">
                 <h2>Insertar transiciones</h2>
-                <button type="button" data-popup-target="#popupA" onclick="">Añadir transiciones de estado</button>
+                <button type="button" data-popup-target="#popupA" onclick="transicionesAFD()">Añadir transiciones de estado</button>
             </div>
         </div>
         <!-- Muestra el popup para ingresar transiciones -->
@@ -62,7 +65,7 @@
                 </div>
                 <!-- Submit -->
                 <div class="transicion-submit">
-                    <button type="button" data-close-button onclick="setTransiciones()">Finalizar</button>
+                    <button type="button" data-close-button onclick="InsertarTrancionesAFD()">Finalizar</button>
                 </div>
             </div>
         </div>

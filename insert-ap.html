@@ -32,7 +32,7 @@
     </div>
     <div class="afd-wrap">
         <div class="formulario">
-            <div class="alfabeto">
+            <div class="sub-form">
                 <h2>Tamaño del alfabeto</h2>
                 <input type="number" id="size-alfabeto" name="automata" autocomplete="off" value="1" min="1" required>
             </div>
@@ -47,37 +47,40 @@
                     <input type="number" id="estadosA2" name="automata" autocomplete="off" value="1" min="1" required>
                 </div>
             </div>
-            <div class="form-ap">
-                <h2>Cantidad de etiquetas</h2>
-                <div class="sub-form-ap">
-                    <p>Automata 1:</p>
-                    <input type="number" id="etiquetasA1" name="automata" autocomplete="off" value="1" min="1" required>
-                    <!-- Poner bool -->
-                </div>
-                <div class="sub-form-ap">
-                    <p>Automata 2:</p>
-                    <input type="number" id="etiquetasA2" name="automata" autocomplete="off" value="1" min="1" required>
-                    <!-- Poner bool -->
-                </div>
-            </div>
-            <div class="transicion">
+            <div class="sub-form transicion">
                 <h2>Insertar transiciones</h2>
-                <button type="button" data-popup-target="#popupA" onclick="">Añadir transiciones de estado</button>
+                <button type="button" data-popup-target="#popupA1" onclick="transicionesAP('true')">Automata 1</button>
+                <button type="button" data-popup-target="#popupA2" onclick="transicionesAP('false')">Automata 2</button>
             </div>
         </div>
         <!-- Muestra el popup para ingresar transiciones -->
-        <div class="popup" id="popupA">
+        <div class="popup" id="popupA1">
             <div class="popup-header">
                 <h1>Transiciones de estado</h1>
                 <button data-close-button class="close-button">&times;</button>
             </div>
             <div class="popup-body">
                 <div class="transicion-formulario">
-                    <div id="transicion-input"></div>
+                    <div id="transicion-input1"></div>
                 </div>
                 <!-- Submit -->
                 <div class="transicion-submit">
-                    <button type="button" data-close-button onclick="setTransiciones()">Finalizar</button>
+                    <button type="button" data-close-button onclick="InsertarTrancionespila('true')">Finalizar</button>
+                </div>
+            </div>
+        </div>
+        <div class="popup" id="popupA2">
+            <div class="popup-header">
+                <h1>Transiciones de estado</h1>
+                <button data-close-button class="close-button">&times;</button>
+            </div>
+            <div class="popup-body">
+                <div class="transicion-formulario">
+                    <div id="transicion-input2"></div>
+                </div>
+                <!-- Submit -->
+                <div class="transicion-submit">
+                    <button type="button" data-close-button onclick="InsertarTrancionespila('false')">Finalizar</button>
                 </div>
             </div>
         </div>

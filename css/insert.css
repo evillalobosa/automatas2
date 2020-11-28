@@ -30,7 +30,7 @@
     margin: 5vw 0px 2vw;
 }
 
-.alfabeto, .estado, .transicion, .etiquetas {
+.sub-form {
     background-color: var(--cloud);
     transform: translate(20%,0%);
     text-align: center;
@@ -40,7 +40,7 @@
     width: 360px;
     height: 130px;
 }
-.alfabeto input, .estado input, .etiquetas input {
+#size-alfabeto, #estadosA, #etiquetasA {
     margin-top: 30px;
     background-color: rgba(255, 255, 255, 0);
     text-align: center;
@@ -49,6 +49,7 @@
     width: 60%;
     height: 35px;
 }
+
 .transicion button {
     margin-top: 30px;
     background-color: var(--blue);
@@ -77,8 +78,7 @@
     padding: 20px;
     height: 35px;
 }
-
-.sub-form-ap input {
+#estadosA1, #estadosA2, #etiquetasA1, #etiquetasA2 {
     background-color: rgba(255, 255, 255, 0);
     text-align: center;
     border: none;

@@ -8,86 +8,234 @@ var alfabeto=[]
 var Bool=false;
 
 var PILAEST1=[]
-var PILATRA1=[]
+var PILATRA2=[]
 
 var PILAEST2=[]
 var PILATRA2=[]
 
-function InsertarEstadosPila(){
+function InsertarAlfabeto(){
+    alfabeto=[];
+    var NumeroIngresado = document.getElementById("size-alfabeto").value;
+    alfabeto.push("E");
 
-    var validacion=0;
+    if((NumeroIngresado>0)&&(NumeroIngresado<702)){
+        var aux;
+        var Textaux;
+        var textaux2;
+        for(i=0;i<NumeroIngresado;i++){
+             if(i<=25){
+                  aux=97+i;
+                  aux=String.fromCharCode(aux);
+                }else{
+                    textaux=96+(Math.trunc(i/26));
+                    textaux=String.fromCharCode(textaux);
+                    textaux2=97+(i-(26*(Math.trunc(i/26))));
+                    textaux2=String.fromCharCode(textaux2);
+                    aux=textaux.concat(textaux2);
+                }
+                alfabeto.push(aux);
+        }
+        console.log("alfabeto agregado correctamente");
+        console.log(alfabeto);
+        localStorage.setItem('alfabeto', alfabeto);
+    }else{
+       console.error("debe ingresar un número mayor a 1 y menor a 702");
+       alert("debe ingresar un número mayor a 1 y menor a 702");
+    }
+}
+
+function InsertarEstadosPila(a){
     var letra1="k";
     var letra2="j";
     var textaux;
-    var Numero1Ingresado = document.getElementById("insertarNumero1").value;
+    var boolt=a;
 
-    if(Numero1Ingresado>0){
-        validacion=true;
+    if(boolt==true){
+        var Numero1Ingresado = document.getElementById("estadosA1").value;
+
+        PILAEST1=[];
+        for(i=0;i<Numero1Ingresado;i++){
+            textaux=letra1.concat(i);
+            PILAEST1.push([textaux,"n"]);
+        }
+        for(j=0;j<PILAEST1.length;j++){
+            if(j==0){
+                PILAEST1[j][1]="i";
+            }else{
+                if(j=(Numero1Ingresado-1)){
+                    PILAEST1[j][1]="f"
+                }
+            }
+        }
+        console.log("estados ingresados correctamente");
+        console.log(PILAEST1);
+        localStorage.setItem('estado1', PILAEST1);
     }else{
-        console.error("numero debe ser mayor que 0");
-        alert("numero debe ser mayor que 0");
+        var Numero2Ingresado = document.getElementById("estadosA2").value;
+
+        if(Numero2Ingresado>0){
+            validacion=true;
+        }else{
+            console.error("numero debe ser mayor que 0");
+            alert("numero debe ser mayor que 0");
+        }
+        PILAEST2=[];
+        for(i=0;i<Numero2Ingresado;i++){
+            textaux=letra2.concat(i);
+            PILAEST2.push([textaux,"n"]);
+        }
+        for(j=0;j<PILAEST2.length;j++){
+            if(j==0){
+                PILAEST2[j][1]="i";
+            }else{
+                if(j=(Numero2Ingresado-1)){
+                    PILAEST2[j][1]="f"
+                }
+            }
+        }
+        console.log("estados ingresados correctamente");
+        console.log(PILAEST2);
+        localStorage.setItem('estado2', PILAEST2);
+    }
+}
+
+function InsertarTrancionespila(a){
+    var boolt=a
+    var validacion=false;
+
+    if(boolt==true){
+        PILATRA1=[];
+    }else{
+        PILATRA2=[];
     }
 
-    if(validacion==1){
-        if(n==1){
-            PILAEST1=[];
-            for(i=0;i<Numero1Ingresado;i++){
-                textaux=letra1.concat(i);
-                PILAEST1.push([textaux,"n"]);
-            }
-            for(j=0;j<PILAEST1.length;j++){
-                if(j==0){
-                    PILAEST1[j][1]="i";
-                }else{
-                    if(j=(Numero1Ingresado-1)){
-                        PILAEST1[j][1]="f"
+    if(boolt==true){
+        var size = (PILAEST1.length*2)-1;
+        for(i=1;i<=size;i++){
+            var Estado1Ingresado = document.getElementById("inicio"+i).value;
+            var Estado2Ingresado = document.getElementById("final"+i).value;
+            var ABCIngresado = document.getElementById("alfabeto"+i).value;
+            var ElementoExtraido=document.getElementById("elementoE"+i).value;
+            var ElementoAgregado=document.getElementById("elementoA"+i).value;
+            PILATRA1.push([Estado1Ingresado,Estado2Ingresado,ABCIngresado,ElementoExtraido,ElementoAgregado]);
+        }
+        if(size>1){
+            if(PILATRA1.length==(2*PILAEST1.length)-1){
+                var cont1=0;
+                var cont2=0;
+                for(j=0;j<PILAEST1.length;j++){
+                    for(k=0;k<PILATRA1;k++){
+                        if(PILATRA1[j][0]==PILAEST1[k][0]){
+                            cont1++;
+                        }
                     }
+                    if(cont1==2){
+                        cont2++;
+                    }
+                    cont1=0;
                 }
+                if(cont2==PILAEST1.length-1){
+                    validacion=true;
+                }else{
+                    console.error("número de transisiones ingresadas no corresponde con el número de estados");
+                    alert("número de transisiones ingresadas no corresponde con el número de estados");
+                }
+            }else{
+                console.error("número de transisiones ingresadas no corresponde con el número de estados");
+                alert("número de transisiones ingresadas no corresponde con el número de estados");
             }
-            console.log("estados ingresados correctamente");
-            console.log(PILAEST1);
         }else{
-            PILAEST2=[];
-            for(i=0;i<Numero1Ingresado;i++){
-                textaux=letra2.concat(i);
-                PILAEST2.push([textaux,"n"]);
-            }
-            for(j=0;j<PILAEST2.length;j++){
-                if(j==0){
-                    PILAEST2[j][1]="i";
-                }else{
-                    if(j=(Numero1Ingresado-1)){
-                        PILAEST2[j][1]="f"
+            console.error("número ingresado debe ser un numero mayor 0");
+            alert("número ingresado debe ser un numero mayor 0");
+        }
+    }else{
+        var size = (PILAEST2.length*2)-1;
+        for(i=1;i<=size;i++){
+            var Estado1Ingresado = document.getElementById("inicio"+i).value;
+            var Estado2Ingresado = document.getElementById("final"+i).value;
+            var ABCIngresado = document.getElementById("alfabeto"+i).value;
+            var ElementoExtraido=document.getElementById("elementoE"+i).value;
+            var ElementoAgregado=document.getElementById("elementoA"+i).value;
+            PILATRA2.push([Estado1Ingresado,Estado2Ingresado,ABCIngresado,ElementoExtraido,ElementoAgregado]);
+        }
+
+        if(size>1){
+            if(PILATRA2.length==(2*PILAEST2.length)-1){
+                var cont1=0;
+                var cont2=0;
+                for(j=0;j<PILAEST2.length;j++){
+                    for(k=0;k<PILATRA2;k++){
+                        if(PILATRA2[j][0]==PILAEST2[k][0]){
+                            cont1++;
+                        }
                     }
+                    if(cont1==2){
+                        cont2++;
+                    }
+                    cont1=0;
                 }
+                if(cont2==PILAEST2.length-1){
+                    validacion=true;
+                }else{
+                    console.error("número de transisiones ingresadas no corresponde con el número de estados");
+                    alert("número de transisiones ingresadas no corresponde con el número de estados");
+                }
+            }else{
+                console.error("número de transisiones ingresadas no corresponde con el número de estados");
+                alert("número de transisiones ingresadas no corresponde con el número de estados");
             }
-            console.log("estados ingresados correctamente");
-            console.log(PILAEST2);
+        }else{
+            console.error("número ingresado debe ser un numero mayor 0");
+            alert("número ingresado debe ser un numero mayor 0");
+        }
+
+    }
+
+    if(validacion == false){
+        if(boolt==true){
+            PILATRA1=[];
+        }else{
+            PILATRA2=[];
+        }
+    }else{
+        if(boolt==true){
+            console.log("Transiciones agregadas adecuadamente");
+            console.log(PILATRA1);
+            localStorage.setItem('transicion1', PILATRA1);
+        }else{
+            console.log("Transiciones agregadas adecuadamente");
+            console.log(PILATRA2);
+            localStorage.setItem('transicion2', PILATRA2);
         }
     }
 
-
 }
 
-// function InsertarTrancionespila(){
-// }
-
 function updateTableAP() {
-    var estadosA1 = document.getElementById("estadosA1").value;
-    var estadosA2 = document.getElementById("estadosA2").value;
-    var tablaAFD = document.getElementById('tabla-automataAP');
-    tablaAP.innerHTML = "";
-    var mayor = 0;
+        var estadosA1 = document.getElementById('estadosA1').value;
+        var estadosA2 = document.getElementById('estadosA2').value;
+        var tablaAP = document.getElementById('tabla-automataAP');
+        tablaAP.innerHTML = "";
+        var mayor = 0;
 
-        // Poner aqui el mayor entre [estadosA1, EstadosA2 y alfabeto] para determinar mayor=?
+        // El mayor entre [EstadosA1, EstadosA2 y el tamaño del Alfabeto]
+        if ( (alfabeto.length > estadosA1) && (alfabeto.length > estadosA2) ) {
+            mayor = alfabeto.length;
+        }
+        else if ( (estadosA1>alfabeto.length) && (estadosA1>estadosA2) ) {
+            mayor = estadosA1;
+        }
+        else {
+            mayor = estadosA2;
+        }
 
-        for (var i = 0; i < mayor; i++) {
+        for (var i=0; i<mayor; i++) {
             var untr = document.createElement("tr");
             var untd1 = document.createElement("td");
             untd1.textContent = alfabeto[i];
             var untd2 = document.createElement("td");
             untd2.textContent = PILAEST1[i];
-            var untd2 = document.createElement("td");
+            var untd3 = document.createElement("td");
             untd3.textContent = PILAEST2[i];
             untr.appendChild(untd1);
             untr.appendChild(untd2);
@@ -96,21 +244,83 @@ function updateTableAP() {
         }
 }
 
+
+// Crea los recuadros para ingresar transiciones
+var inputTransicion = function(transicion) {
+    var div = document.createElement("div");
+    document.getElementById(transicion).appendChild(div);
+    // Set div ID: Trans+#n
+    div.setAttribute("id", "Trans" + document.getElementById(transicion).childElementCount);
+    div.setAttribute("style", "padding:10px 0px; display:flex; justify-content:space-around;");
+
+    // Set inputs: inicio
+    var inicio = document.createElement("input")
+    inicio.setAttribute("id", "inicio" + document.getElementById(transicion).childElementCount);
+    inicio.setAttribute("type","text");
+    inicio.setAttribute("placeholder", "inicio");
+    inicio.setAttribute("style", "padding:10px 5px; width:80px;");
+
+    // Set inputs: alfabeto
+    var alfabeto = document.createElement("input")
+    alfabeto.setAttribute("id", "alfabeto" + document.getElementById(transicion).childElementCount);
+    alfabeto.setAttribute("type","text");
+    alfabeto.setAttribute("placeholder", "alfabeto");
+    alfabeto.setAttribute("style", "padding:10px 5px; width:80px;");
+
+    // Set inputs: termino
+    var termino = document.createElement("input")
+    termino.setAttribute("id", "termino" + document.getElementById(transicion).childElementCount);
+    termino.setAttribute("type","text");
+    termino.setAttribute("placeholder", "termino");
+    termino.setAttribute("style", "padding:10px 5px; width:80px;");
+
+    // Set inputs: elementoE
+    var elementoE = document.createElement("input")
+    elementoE.setAttribute("id", "elementoE" + document.getElementById(transicion).childElementCount);
+    elementoE.setAttribute("type","text");
+    elementoE.setAttribute("placeholder", "Extraido");
+    elementoE.setAttribute("style", "padding:10px 5px; width:80px;");
+
+    // Set inputs: elementoA
+    var elementoA = document.createElement("input")
+    elementoA.setAttribute("id", "elementoA" + document.getElementById(transicion).childElementCount);
+    elementoA.setAttribute("type","text");
+    elementoA.setAttribute("placeholder", "Añadido");
+    elementoA.setAttribute("style", "padding:10px 5px; width:80px;");
+
+
+    // Append inputs
+    div.appendChild(inicio);
+    div.appendChild(alfabeto);
+    div.appendChild(termino);
+    div.appendChild(elementoE);
+    div.appendChild(elementoA);
+};
+
+function transicionesAP(bool) {
+    // SI es automata 1
+    if(bool == 'true') {
+        for(var i=0; i<PILAEST1.length*(alfabeto.length-1); i++){
+            inputTransicion('transicion-input1');
+        }
+    }
+    else {
+        // Sino es automata2
+        for(var i=0; i<PILAEST2.length*(alfabeto.length-1); i++){
+            inputTransicion('transicion-input2');
+        }
+    }
+}
+
 updateAlfabeto.addEventListener("keydown", function () {
     InsertarAlfabeto();
     updateTableAP();
 });
 updateEstadoAP1.addEventListener("keydown", function () {
-    InsertarEstadosAFD();
+    InsertarEstadosPila(true);
     updateTableAP();
 });
 updateEstadoAP2.addEventListener("keydown", function () {
-    InsertarEstadosAFD();
+    InsertarEstadosPila(false);
     updateTableAP();
-});
-updateEtiquetasAP1.addEventListener("keydown", function () {
-    InsertarEstadosAFD();
-});
-updateEtiquetasAP2.addEventListener("keydown", function () {
-    InsertarEstadosAFD();
 });
