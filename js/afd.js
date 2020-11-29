@@ -105,7 +105,7 @@ function InsertarTrancionesAFD(){
 
     for(i=1;i<=size;i++){
         var Estado1Ingresado = document.getElementById("inicio"+i).value;
-        var Estado2Ingresado = document.getElementById("final"+i).value;
+        var Estado2Ingresado = document.getElementById("termino"+i).value;
         var ABCIngresado = document.getElementById("alfabeto"+i).value;
         AFDTRA.push([Estado1Ingresado,ABCIngresado,Estado2Ingresado]);
     }
@@ -117,7 +117,7 @@ function InsertarTrancionesAFD(){
                 var cont2=0;
                 for(k=0;k<AFDTRA.length;k++){
                     if(alfabeto[j]==AFDTRA[k][1]){
-                        cont2++;
+                        cont2++; 
                     }
                 }
                 if(cont2==AFDEST.length){
@@ -125,7 +125,30 @@ function InsertarTrancionesAFD(){
                 }
             }
             if(cont1==AFDEST.length){
-                validacion=true;
+                cont1=0;
+                cont2=0;
+                for(m=0;m<AFDTRA.length;m++){
+                    for(n=0;n<AFDEST.length;n++){
+                        if((AFDEST[n][0]==AFDTRA[m][0])||(AFDEST[n][0]==AFDTRA[m][2])){
+                             
+                             if(AFDTRA[m][0]==AFDTRA[m][2]){
+                                cont1+=2;
+                             }else{
+                                cont1++;
+                             }
+                        }
+                    }
+                    if(cont1==2){
+                        cont2++;
+                    }
+                    cont1=0;   
+                }
+                if(cont2==AFDTRA.length){
+                    validacion=true;
+                }else{
+                    console.error("estado de transicion no presente en los ingresados previamente");
+                    alert("estado de transicion no presente en los ingresados previamente");
+                }
             }else{
                 console.error("número de veces que se uso cada elemento del alfabeto no corresponde con el tipo de automata");
                 alert("número de veces que se uso cada elemento del alfabeto no corresponde con el tipo de automata");
@@ -141,8 +164,7 @@ function InsertarTrancionesAFD(){
 
     if(validacion == false){
         AFDTRA=[];
-    }
-    else {
+    }else {
         console.log("Las Transiciones se actualizado adecuadamente");
         console.log(AFDTRA);
         localStorage.setItem('transicion', AFDTRA);
@@ -186,21 +208,21 @@ var inputTransicion = function() {
     var inicio = document.createElement("input")
     inicio.setAttribute("id", "inicio" + document.getElementById('transicion-input').childElementCount);
     inicio.setAttribute("type","text");
-    inicio.setAttribute("placeholder", "inicio");
+    inicio.setAttribute("placeholder", "Inicio");
     inicio.setAttribute("style", "padding:10px; width:100px;");
 
     // Set inputs: alfabeto
     var alfabeto = document.createElement("input")
     alfabeto.setAttribute("id", "alfabeto" + document.getElementById('transicion-input').childElementCount);
     alfabeto.setAttribute("type","text");
-    alfabeto.setAttribute("placeholder", "alfabeto");
+    alfabeto.setAttribute("placeholder", "Alfabeto");
     alfabeto.setAttribute("style", "padding:10px; width:100px;");
 
     // Set inputs: termino
     var termino = document.createElement("input")
     termino.setAttribute("id", "termino" + document.getElementById('transicion-input').childElementCount);
     termino.setAttribute("type","text");
-    termino.setAttribute("placeholder", "termino");
+    termino.setAttribute("placeholder", "Termino");
     termino.setAttribute("style", "padding:10px; width:100px;");
 
     // Append inputs
@@ -210,6 +232,7 @@ var inputTransicion = function() {
 };
 
 function transicionesAFD() {
+    document.getElementById('transicion-input').innerHTML="";
     for(var i=0; i<AFDEST.length*alfabeto.length; i++){
         inputTransicion();
     }

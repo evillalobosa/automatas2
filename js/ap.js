@@ -100,7 +100,7 @@ function InsertarEstadosPila(a){
 }
 
 function InsertarTrancionespila(a){
-    var boolt=a
+    var boolt=a;
     var validacion=false;
 
     if(boolt==true){
@@ -110,11 +110,11 @@ function InsertarTrancionespila(a){
     }
 
     if(boolt==true){
-        var size = (PILAEST1.length*2)-1;
-        for(i=1;i<=size;i++){
+        var size = PILAEST1.length*2 - 1;
+        for(var i=1;i<=size;i++){
             var Estado1Ingresado = document.getElementById("inicio"+i).value;
-            var Estado2Ingresado = document.getElementById("final"+i).value;
             var ABCIngresado = document.getElementById("alfabeto"+i).value;
+            var Estado2Ingresado = document.getElementById("termino"+i).value;
             var ElementoExtraido=document.getElementById("elementoE"+i).value;
             var ElementoAgregado=document.getElementById("elementoA"+i).value;
             PILATRA1.push([Estado1Ingresado,Estado2Ingresado,ABCIngresado,ElementoExtraido,ElementoAgregado]);
@@ -130,12 +130,34 @@ function InsertarTrancionespila(a){
                         }
                     }
                     if(cont1==2){
-                        cont2++;
+                        cont2++; 
                     }
                     cont1=0;
                 }
                 if(cont2==PILAEST1.length-1){
-                    validacion=true;
+                    cont1=0;
+                    cont2=0;
+                    for(m=0;m<PILATRA1.length;m++){
+                        for(n=0;n<PILAEST1.length;n++){
+                            if((PILAEST1[n][0]==PILATRA1[m][0])||(PILAEST1[n][0]==PILATRA1[m][1])){
+                                 if(PILATRA1[m][0]==PILATRA1[m][1]){
+                                     cont1+=2;
+                                    }else{
+                                        cont1++;
+                                    }
+                            }
+                        }
+                        if(cont1==2){
+                            cont2++;
+                        }
+                        cont1=0;   
+                    }
+                    if(cont2==PILATRA1.length){
+                        validacion=true;
+                    }else{
+                        console.error("estado de transicion no presente en los ingresados previamente");
+                        alert("estado de transicion no presente en los ingresados previamente");
+                    }
                 }else{
                     console.error("número de transisiones ingresadas no corresponde con el número de estados");
                     alert("número de transisiones ingresadas no corresponde con el número de estados");
@@ -149,11 +171,11 @@ function InsertarTrancionespila(a){
             alert("número ingresado debe ser un numero mayor 0");
         }
     }else{
-        var size = (PILAEST2.length*2)-1;
-        for(i=1;i<=size;i++){
+        var size = PILAEST2.length*2 - 1;
+        for(var i=1;i<=size;i++){
             var Estado1Ingresado = document.getElementById("inicio"+i).value;
-            var Estado2Ingresado = document.getElementById("final"+i).value;
             var ABCIngresado = document.getElementById("alfabeto"+i).value;
+            var Estado2Ingresado = document.getElementById("termino"+i).value;
             var ElementoExtraido=document.getElementById("elementoE"+i).value;
             var ElementoAgregado=document.getElementById("elementoA"+i).value;
             PILATRA2.push([Estado1Ingresado,Estado2Ingresado,ABCIngresado,ElementoExtraido,ElementoAgregado]);
@@ -175,7 +197,29 @@ function InsertarTrancionespila(a){
                     cont1=0;
                 }
                 if(cont2==PILAEST2.length-1){
-                    validacion=true;
+                    cont1=0;
+                    cont2=0;
+                    for(m=0;m<PILATRA2.length;m++){
+                        for(n=0;n<PILAEST2.length;n++){
+                            if((PILAEST2[n][0]==PILATRA2[m][0])||(PILAEST2[n][0]==PILATRA2[m][1])){
+                                 if(PILATRA2[m][0]==PILATRA2[m][1]){
+                                     cont1+=2;
+                                    }else{
+                                        cont1++;
+                                    }
+                            }
+                        }
+                        if(cont1==2){
+                            cont2++;
+                        }
+                        cont1=0;   
+                    }
+                    if(cont2==PILATRA2.length){
+                        validacion=true;
+                    }else{
+                        console.error("estado de transicion no presente en los ingresados previamente");
+                        alert("estado de transicion no presente en los ingresados previamente");
+                    }
                 }else{
                     console.error("número de transisiones ingresadas no corresponde con el número de estados");
                     alert("número de transisiones ingresadas no corresponde con el número de estados");
@@ -185,8 +229,8 @@ function InsertarTrancionespila(a){
                 alert("número de transisiones ingresadas no corresponde con el número de estados");
             }
         }else{
-            console.error("número ingresado debe ser un numero mayor 0");
-            alert("número ingresado debe ser un numero mayor 0");
+            console.error("Numero ingresado debe ser un numero mayor 0");
+            alert("Numero ingressizeado debe ser un numero mayor 0");
         }
 
     }
@@ -208,14 +252,15 @@ function InsertarTrancionespila(a){
             localStorage.setItem('transicion2', PILATRA2);
         }
     }
-
+    document.getElementById('transicion-input1').innerHTML= '';
+    document.getElementById('transicion-input2').innerHTML= '';
 }
 
 function updateTableAP() {
         var estadosA1 = document.getElementById('estadosA1').value;
         var estadosA2 = document.getElementById('estadosA2').value;
         var tablaAP = document.getElementById('tabla-automataAP');
-        tablaAP.innerHTML = "";
+        tablaAP.innerHTML = '';
         var mayor = 0;
 
         // El mayor entre [EstadosA1, EstadosA2 y el tamaño del Alfabeto]
@@ -257,37 +302,36 @@ var inputTransicion = function(transicion) {
     var inicio = document.createElement("input")
     inicio.setAttribute("id", "inicio" + document.getElementById(transicion).childElementCount);
     inicio.setAttribute("type","text");
-    inicio.setAttribute("placeholder", "inicio");
+    inicio.setAttribute("placeholder", "Inicio");
     inicio.setAttribute("style", "padding:10px 5px; width:80px;");
 
     // Set inputs: alfabeto
     var alfabeto = document.createElement("input")
     alfabeto.setAttribute("id", "alfabeto" + document.getElementById(transicion).childElementCount);
     alfabeto.setAttribute("type","text");
-    alfabeto.setAttribute("placeholder", "alfabeto");
+    alfabeto.setAttribute("placeholder", "Alfabeto");
     alfabeto.setAttribute("style", "padding:10px 5px; width:80px;");
 
     // Set inputs: termino
     var termino = document.createElement("input")
     termino.setAttribute("id", "termino" + document.getElementById(transicion).childElementCount);
     termino.setAttribute("type","text");
-    termino.setAttribute("placeholder", "termino");
+    termino.setAttribute("placeholder", "Termino");
     termino.setAttribute("style", "padding:10px 5px; width:80px;");
 
-    // Set inputs: elementoE
+    // Set inputs: Extraido
     var elementoE = document.createElement("input")
     elementoE.setAttribute("id", "elementoE" + document.getElementById(transicion).childElementCount);
     elementoE.setAttribute("type","text");
     elementoE.setAttribute("placeholder", "Extraido");
     elementoE.setAttribute("style", "padding:10px 5px; width:80px;");
 
-    // Set inputs: elementoA
+    // Set inputs: Añadido
     var elementoA = document.createElement("input")
     elementoA.setAttribute("id", "elementoA" + document.getElementById(transicion).childElementCount);
     elementoA.setAttribute("type","text");
     elementoA.setAttribute("placeholder", "Añadido");
     elementoA.setAttribute("style", "padding:10px 5px; width:80px;");
-
 
     // Append inputs
     div.appendChild(inicio);
@@ -297,16 +341,19 @@ var inputTransicion = function(transicion) {
     div.appendChild(elementoA);
 };
 
-function transicionesAP(bool) {
+function transicionesAP(a) {
+    bool= a;
     // SI es automata 1
-    if(bool == 'true') {
-        for(var i=0; i<PILAEST1.length*(alfabeto.length-1); i++){
+    if(bool == true) {
+        document.getElementById('transicion-input1').innerHTML= '';
+        for(var i=0; i<PILAEST1.length*2-1; i++){
             inputTransicion('transicion-input1');
         }
     }
     else {
         // Sino es automata2
-        for(var i=0; i<PILAEST2.length*(alfabeto.length-1); i++){
+        document.getElementById('transicion-input2').innerHTML= '';
+        for(var i=0; i<PILAEST2.length*2-1; i++){
             inputTransicion('transicion-input2');
         }
     }

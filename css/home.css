@@ -7,11 +7,12 @@
 
 .insert-afd , .insert-ap {
     background-color: var(--cloud);
+    margin-top: 50px;
     padding: 20px;
     border-radius: 10px;
     width: 30vw;
     height: 22vw;
-    overflow: hidden;
+    overflow: auto;
 }
 .insert-afd a, .insert-ap a{
     display: flex;

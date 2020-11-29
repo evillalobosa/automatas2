@@ -96,7 +96,7 @@ function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
     /** Finalización */
     // Imprime en pagina
     var printUnion = document.getElementById('union');
-    printUnion.innerHTML= "";
+    printUnion.innerHTML= '';
     // Estados
     var estados = document.createElement("h3");
     estados.textContent = 'Estados: '+ Estados_neo ;
@@ -186,7 +186,7 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
     /** Finalización */
     // Imprime en pagina
     var printUnion = document.getElementById('union');
-    printUnion.innerHTML= "";
+    printUnion.innerHTML= '';
     // Estados
     var estados = document.createElement("h3");
     estados.textContent = 'Estados: '+ neoEstados ;
