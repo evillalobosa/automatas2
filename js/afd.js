@@ -30,7 +30,7 @@ function InsertarAlfabeto(){
         }
         console.log("alfabeto agregado correctamente");
         console.log(alfabeto);
-        localStorage.setItem('alfabeto', alfabeto);
+        localStorage.setItem('alfabeto', JSON.stringify(alfabeto));
     }else{
        console.error("Debe ingresar un número mayor a 1 y menor a 702");
        alert("Debe ingresar un número mayor a 1 y menor a 702");
@@ -58,21 +58,21 @@ function InsertarEstadosAFD(){
         }
         console.log("Estados ingresados correctamente");
         console.log(AFDEST);
-        localStorage.setItem('estado', AFDEST);
+        localStorage.setItem('estado', JSON.stringify(AFDEST));
     }
 
 }
 
 function InsertarEtiquetas(){
     var NumeroIngresado = document.getElementById("etiquetasA").value;
-    var BoolIngresado = document.getElementById("etiquetaBool").value;
+    var BoolIngresado = document.getElementById("etiquetaBool").checked;
     validacion=false;
 
-    if((AFDEST.length-1)>NumeroIngresado){
+    if(AFDEST.length > NumeroIngresado){
         validacion=true;
     }else{
-        console.error("numero de estados finales mayor de lo permitido");
-        alert("numero de estados finales mayor de lo permitido");
+        console.error("Numero de estados finales mayor de lo permitido");
+        alert("Numero de estados finales mayor de lo permitido");
     }
 
     if(validacion==true){
@@ -94,7 +94,7 @@ function InsertarEtiquetas(){
         }
         console.log("las etiquetas se actualizado adecuadamente");
         console.log(AFDEST);
-        localStorage.setItem('estado', AFDEST);
+        localStorage.setItem('estado', JSON.stringify(AFDEST));
     }
 }
 
@@ -117,20 +117,20 @@ function InsertarTrancionesAFD(){
                 var cont2=0;
                 for(k=0;k<AFDTRA.length;k++){
                     if(alfabeto[j]==AFDTRA[k][1]){
-                        cont2++; 
+                        cont2++;
                     }
                 }
                 if(cont2==AFDEST.length){
                     cont1++;
                 }
             }
-            if(cont1==AFDEST.length){
+            if(cont1==alfabeto.length){
                 cont1=0;
                 cont2=0;
                 for(m=0;m<AFDTRA.length;m++){
                     for(n=0;n<AFDEST.length;n++){
                         if((AFDEST[n][0]==AFDTRA[m][0])||(AFDEST[n][0]==AFDTRA[m][2])){
-                             
+
                              if(AFDTRA[m][0]==AFDTRA[m][2]){
                                 cont1+=2;
                              }else{
@@ -141,7 +141,7 @@ function InsertarTrancionesAFD(){
                     if(cont1==2){
                         cont2++;
                     }
-                    cont1=0;   
+                    cont1=0;
                 }
                 if(cont2==AFDTRA.length){
                     validacion=true;
@@ -167,7 +167,7 @@ function InsertarTrancionesAFD(){
     }else {
         console.log("Las Transiciones se actualizado adecuadamente");
         console.log(AFDTRA);
-        localStorage.setItem('transicion', AFDTRA);
+        localStorage.setItem('transicion', JSON.stringify(AFDTRA));
     }
 }
 
@@ -248,4 +248,5 @@ updateEstadoAFD.addEventListener("keydown", function () {
 });
 updateEtiquetasAFD.addEventListener("keydown", function () {
     InsertarEtiquetas();
+    updateTableAFD();
 });

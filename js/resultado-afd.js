@@ -1,3 +1,3 @@
-var alfabeto = localStorage.getItem('alfabeto');
-var estado = localStorage.getItem('estado');
-var transicion = localStorage.getItem('transicion');
+var alfabeto = JSON.parse(localStorage.getItem('alfabeto'));
+var estado = JSON.parse(localStorage.getItem('estado'));
+var transicion = JSON.parse(localStorage.getItem('transicion'));

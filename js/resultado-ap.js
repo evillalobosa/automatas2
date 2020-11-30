@@ -1,8 +1,8 @@
-var alfabeto = localStorage.getItem('alfabeto');
-var estado1 = localStorage.getItem('estado1');
-var estado2 = localStorage.getItem('estado2');
-var T1 = localStorage.getItem('transicion1');
-var T2 = localStorage.getItem('transicion2');
+var alfabeto = JSON.parse(localStorage.getItem('alfabeto'));
+var estado1 = JSON.parse(localStorage.getItem('estado1'));
+var estado2 = JSON.parse(localStorage.getItem('estado2'));
+var T1 = JSON.parse(localStorage.getItem('transicion1'));
+var T2 = JSON.parse(localStorage.getItem('transicion2'));
 
 // Calculo de operaciones
 function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
@@ -98,17 +98,26 @@ function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
     var printUnion = document.getElementById('union');
     printUnion.innerHTML= '';
     // Estados
-    var estados = document.createElement("h3");
-    estados.textContent = 'Estados: '+ Estados_neo ;
-    printUnion.appendChild(estados);
+    var estadosH3 = document.createElement("h3");
+    estadosH3.textContent = 'Estados';
+    var estadosP = document.createElement("p");
+    estadosP.textContent = Estados_neo;
+    printUnion.appendChild(estadosH3);
+    printUnion.appendChild(estadosP);
     // Alfabeto
-    var alfabeto = document.createElement("h3");
-    alfabeto.textContent = 'Alfabeto: '+Alfabeto_neo;
-    printUnion.appendChild(alfabeto);
+    var alfabetoH3 = document.createElement("h3");
+    alfabetoH3.textContent = 'Alfabeto';
+    var alfabetoP = document.createElement("p");
+    alfabetoP.textContent = Alfabeto_neo;
+    printUnion.appendChild(alfabetoH3);
+    printUnion.appendChild(alfabetoP);
     // Transicion
-    var transiciones = document.createElement("h3");
-    transiciones.textContent = 'Transicion: '+Transicion_neo;
-    printUnion.appendChild(transiciones);
+    var transicionesH3 = document.createElement("h3");
+    transicionesH3.textContent = 'Transicion';
+    var transicionesP = document.createElement("p");
+    transicionesP.textContent = Transicion_neo;
+    printUnion.appendChild(transicionesH3);
+    printUnion.appendChild(transicionesP);
 
     // Procedemos a retornar todo el nuevo Automata de Pila.
     return [Estados_neo, Alfabeto_neo, Transicion_neo];
@@ -136,7 +145,7 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
                 q
                 if (neoEstados[q][1] == 'f') {
                     if (neoTransiciones[i][2] != neoAlfabeto[k]) {
-                        var aux_transiciones = [neoEstados[q][0], aux_estados[i][0], neoAlfabeto[k], 'Nada', 'Nada'];
+                        var aux_transiciones = [neoEstados[q][0], aux_estados[i][0], neoAlfabeto[k], 'E', 'E'];
                         neoTransiciones.push(aux_transiciones);
                     }
                 }
@@ -182,23 +191,32 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
             }
         }
     }
-    
+
     /** Finalización */
     // Imprime en pagina
-    var printUnion = document.getElementById('union');
-    printUnion.innerHTML= '';
+    var printConcatenacion = document.getElementById('concatenacion');
+    printConcatenacion.innerHTML= '';
     // Estados
-    var estados = document.createElement("h3");
-    estados.textContent = 'Estados: '+ neoEstados ;
-    printUnion.appendChild(estados);
+    var estadosH3 = document.createElement("h3");
+    estadosH3.textContent = 'Estados';
+    var estadosP = document.createElement("p");
+    estadosP.textContent = neoEstados ;
+    printConcatenacion.appendChild(estadosH3);
+    printConcatenacion.appendChild(estadosP);
     // Alfabeto
-    var alfabeto = document.createElement("h3");
-    alfabeto.textContent = 'Alfabeto: '+neoAlfabeto;
-    printUnion.appendChild(alfabeto);
+    var alfabetoH3 = document.createElement("h3");
+    alfabetoH3.textContent = 'Alfabeto';
+    var alfabetoP = document.createElement("p");
+    alfabetoP.textContent = neoAlfabeto;
+    printConcatenacion.appendChild(alfabetoH3);
+    printConcatenacion.appendChild(alfabetoP);
     // Transicion
-    var transiciones = document.createElement("h3");
-    transiciones.textContent = 'Transicion: '+neoTransiciones;
-    printUnion.appendChild(transiciones);
+    var transicionesH3 = document.createElement("h3");
+    transicionesH3.textContent = 'Transicion';
+    var transicionesP = document.createElement("p");
+    transicionesP.textContent = neoTransiciones;
+    printConcatenacion.appendChild(transicionesH3);
+    printConcatenacion.appendChild(transicionesP);
 
     // Retornamos el nuevo Automata.
     console.log("Después de todos los cambios, así queda nuestro Automata : ");
@@ -206,6 +224,6 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
     return [neoEstados, neoAlfabeto, neoTransiciones];
 }
 
-
+// Se auto-inician
 union(estado1, estado2, alfabeto, T1, T2);
 Concatenacion(estado1, estado2, alfabeto, T1, T2);
