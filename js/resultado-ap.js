@@ -115,7 +115,7 @@ function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
     // Transicion
     var transicionTABLE = document.getElementById('unionTable');
     var transicionesH3 = document.createElement("h3");
-    transicionesH3.textContent = 'Transicion';
+    transicionesH3.textContent = 'Transición';
     printUnion.appendChild(transicionesH3);
     var i=0;
     do {
@@ -236,7 +236,7 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
     // Transicion
     var transicionTABLE= document.getElementById('concatenacionTable');
     var transicionesH3 = document.createElement("h3");
-    transicionesH3.textContent = 'Transicion';
+    transicionesH3.textContent = 'Transición';
     printConcatenacion.appendChild(transicionesH3);
     var i=0;
     do {

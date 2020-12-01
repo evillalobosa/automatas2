@@ -222,7 +222,7 @@ var inputTransicion = function() {
     var termino = document.createElement("input")
     termino.setAttribute("id", "termino" + document.getElementById('transicion-input').childElementCount);
     termino.setAttribute("type","text");
-    termino.setAttribute("placeholder", "Termino");
+    termino.setAttribute("placeholder", "Término");
     termino.setAttribute("style", "padding:10px; width:100px;");
 
     // Append inputs
