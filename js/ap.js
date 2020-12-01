@@ -113,8 +113,8 @@ function InsertarTrancionespila(a){
         var size = PILAEST1.length*2 - 1;
         for(var i=1;i<=size;i++){
             var Estado1Ingresado = document.getElementById("inicio"+i).value;
-            var ABCIngresado = document.getElementById("alfabeto"+i).value;
             var Estado2Ingresado = document.getElementById("termino"+i).value;
+            var ABCIngresado = document.getElementById("alfabeto"+i).value;
             var ElementoExtraido=document.getElementById("elementoE"+i).value;
             var ElementoAgregado=document.getElementById("elementoA"+i).value;
             PILATRA1.push([Estado1Ingresado,Estado2Ingresado,ABCIngresado,ElementoExtraido,ElementoAgregado]);
@@ -264,7 +264,7 @@ function updateTableAP() {
         var mayor = 0;
 
         // El mayor entre [EstadosA1, EstadosA2 y el tamaño del Alfabeto]
-        if ( (alfabeto.length > estadosA1) && (alfabeto.length > estadosA2) ) {
+        if ( (alfabeto.length >= estadosA1) && (alfabeto.length >= estadosA2) ) {
             mayor = alfabeto.length;
         }
         else if ( (estadosA1>alfabeto.length) && (estadosA1>estadosA2) ) {

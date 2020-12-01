@@ -8,6 +8,7 @@ var T2 = JSON.parse(localStorage.getItem('transicion2'));
 function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
     var Estados_neo = [['A', 'i']], Alfabeto_neo = [], Transicion_neo = [];
     var aux = [];
+    console.log("----- UNION de automatas ------");
 
     /** Alfabeto */
     // Procedemos a guardar el Alfabeto.
@@ -112,12 +113,31 @@ function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
     printUnion.appendChild(alfabetoH3);
     printUnion.appendChild(alfabetoP);
     // Transicion
+    var transicionTABLE = document.getElementById('unionTable');
     var transicionesH3 = document.createElement("h3");
     transicionesH3.textContent = 'Transicion';
-    var transicionesP = document.createElement("p");
-    transicionesP.textContent = Transicion_neo;
     printUnion.appendChild(transicionesH3);
-    printUnion.appendChild(transicionesP);
+    var i=0;
+    do {
+        var untr = document.createElement("tr");
+        var untd1 = document.createElement("td");
+        untd1.textContent = Transicion_neo[i][0];
+        var untd2 = document.createElement("td");
+        untd2.textContent = Transicion_neo[i][1];
+        var untd3 = document.createElement("td");
+        untd3.textContent = Transicion_neo[i][2];
+        var untd4 = document.createElement("td");
+        untd4.textContent = Transicion_neo[i][3];
+        var untd5 = document.createElement("td");
+        untd5.textContent = Transicion_neo[i][4];
+        i++;
+        untr.appendChild(untd1);
+        untr.appendChild(untd2);
+        untr.appendChild(untd3);
+        untr.appendChild(untd4);
+        untr.appendChild(untd5);
+        transicionTABLE.appendChild(untr);
+    } while (Transicion_neo[i]!=undefined);
 
     // Procedemos a retornar todo el nuevo Automata de Pila.
     return [Estados_neo, Alfabeto_neo, Transicion_neo];
@@ -125,6 +145,8 @@ function union (Estado_1, Estado_2, Alfabeto, Transiciones_1, Transiciones_2) {
 
 function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2) {
     var neoEstados = [], neoAlfabeto = [], neoTransiciones = [];
+
+    console.log("----- CONCATEACION de automatas ------");
 
     // Guardamos los Estados y las Transiciones del Automata 1 en el nuevo Automata.
     neoEstados = Estado_1.slice();
@@ -156,17 +178,18 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
     for (let i = 0; i < Transicion_2.length; i++) {
         neoTransiciones.push(Transicion_2[i]);
     }
-    console.log("Así es como queda la nueva Transición : [" + neoTransiciones + "]");
+    console.log("Así es como queda la nueva Transición:");
+    console.log(neoTransiciones);
 
     // Guardamos el resto de los Estados.
-    console.log(aux_estados[0][1])
     for (let i = neoEstados.length; aux_estados != 0; i++) {
         neoEstados[i] = aux_estados.shift();
         if (neoEstados[i][1] == 'i') {
             neoEstados[i][1] = 'n';
         }
     }
-    console.log("Continuamos con como queda los nuevos Estados : [" + neoEstados + "]");
+    console.log("Continuamos con como queda los nuevos Estados:");
+    console.log(neoEstados);
 
     // Si el Automata 2 posee un Estado Inicial Final dejamos todo como está, a excepción del Estado Inicial que pasa a ser No Final.
     // En caso contrario, los Estados Finales del Automata 1 pasan a ser No Finales.
@@ -211,16 +234,38 @@ function Concatenacion (Estado_1, Estado_2, Alfabeto, Transicion_1, Transicion_2
     printConcatenacion.appendChild(alfabetoH3);
     printConcatenacion.appendChild(alfabetoP);
     // Transicion
+    var transicionTABLE= document.getElementById('concatenacionTable');
     var transicionesH3 = document.createElement("h3");
     transicionesH3.textContent = 'Transicion';
-    var transicionesP = document.createElement("p");
-    transicionesP.textContent = neoTransiciones;
     printConcatenacion.appendChild(transicionesH3);
-    printConcatenacion.appendChild(transicionesP);
+    var i=0;
+    do {
+        var untr = document.createElement("tr");
+        var untd1 = document.createElement("td");
+        untd1.textContent = neoTransiciones[i][0];
+        var untd2 = document.createElement("td");
+        untd2.textContent = neoTransiciones[i][1];
+        var untd3 = document.createElement("td");
+        untd3.textContent = neoTransiciones[i][2];
+        var untd4 = document.createElement("td");
+        untd4.textContent = neoTransiciones[i][3];
+        var untd5 = document.createElement("td");
+        untd5.textContent = neoTransiciones[i][4];
+        i++;
+        untr.appendChild(untd1);
+        untr.appendChild(untd2);
+        untr.appendChild(untd3);
+        untr.appendChild(untd4);
+        untr.appendChild(untd5);
+        transicionTABLE.appendChild(untr);
+    } while (neoTransiciones[i]!=undefined);
+
 
     // Retornamos el nuevo Automata.
     console.log("Después de todos los cambios, así queda nuestro Automata : ");
-    console.log("[" + neoEstados + "], [" + neoAlfabeto + "], [" + neoTransiciones + "]");
+    console.log(neoEstados);
+    console.log(neoAlfabeto);
+    console.log(neoTransiciones);
     return [neoEstados, neoAlfabeto, neoTransiciones];
 }
 

@@ -86,26 +86,6 @@
     width: 40%;
 }
 
-
 table {
-    width: 25vw;
-    background: var(--white-fg);
-    color: var(--black-fg);
     transform: translate(-20%,0%);
-    font-family: 'Source Sans Pro', sans-serif;
-}
-caption {
-    background: var(--black-fg);
-    color: var(--white-fg);
-    padding: 10px 5px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-td, th {
-    padding: 8px;
-    border-bottom: 1px solid white;
-}
-tr:nth-child(even){
-    background: var(--black-fg);
-    color: var(--white-fg);
 }
